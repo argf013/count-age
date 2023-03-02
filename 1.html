@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Title</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS v5.2.1 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+
+</head>
+
+<body>
+    <main class="text-center mt-5">
+
+
+        <div class="card mx-auto" style="width: 18em;">
+            <div class="card-header">
+                <h3>Count Your Age</h3>
+            </div>
+            <div class="card-body">
+
+                <label for="" class="form-label">Enter Your Birthday</label>
+                <input type="text" name="" id="inputDD" class="form-control text-center w-50 mx-auto"
+                    placeholder="dd-mm-yyyy" aria-describedby="helpId">
+                <button onclick="count()" class="btn btn-primary mt-3">Count</button>
+
+            </div>
+        </div>
+    </main>
+    <footer>
+        <!-- place footer here -->
+    </footer>
+    <!-- Bootstrap JavaScript Libraries -->
+    <script>
+
+
+        const count = () => {
+            const ingput = document.getElementById('inputDD');
+            const tanggalLahir = ingput.value;
+            const tanggalLahirObj = new Date(tanggalLahir.split("-").reverse().join("-"));
+            const selisihWaktu = Date.now() - tanggalLahirObj.getTime();
+            const umurMilisecond = new Date(selisihWaktu);
+            const tahun = umurMilisecond.getUTCFullYear() - 1970;
+            const bulan = umurMilisecond.getUTCMonth();
+            const hari = umurMilisecond.getUTCDate() - 1;
+            alert(`Umur Anda adalah ${tahun} tahun, ${bulan} bulan, dan ${hari} hari.`);
+
+            async function getUserInput() {
+                return new Promise((resolve) => {
+                    const ingput = document.getElementById('inputDD');
+                    const userInput = ingput.value;
+                    const [dd, mm, yyyy] = userInput.split('-');
+                    const formattedDate = `${mm}-${dd}-${yyyy}`;
+                    resolve(formattedDate);
+                });
+            }
+
+            async function calculateDays() {
+                const startDate = new Date(await getUserInput());
+                const endDate = new Date();
+                const diffTime = Math.abs(endDate - startDate);
+                const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+                alert(`${diffDays} hari berlalu sejak Anda dilahirkan`);
+            }
+            calculateDays()
+        }
+
+
+
+
+
+
+
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+        </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+        integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+        </script>
+</body>
+
+</html>
